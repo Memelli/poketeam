@@ -1,0 +1,7 @@
+table:
+  name: teams_pokemons
+  schema: teams
+object_relationships:
+  - name: pokemons_to_teams
+    using:
+      foreign_key_constraint_on: teams_id

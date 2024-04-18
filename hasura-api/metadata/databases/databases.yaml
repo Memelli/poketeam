@@ -1,0 +1,14 @@
+- name: poke_api
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url:
+        connection_parameters:
+          database: poke_api
+          host: postgres
+          password: postgrespassword
+          port: 5432
+          username: postgres
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include poke_api/tables/tables.yaml"
