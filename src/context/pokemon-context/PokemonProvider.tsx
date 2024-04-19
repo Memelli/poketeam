@@ -18,7 +18,7 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
     return useQuery<IPokemonsQueryData>(GET_POKEMONS, {
       variables: {
         offset: 0,
-        limit: 20,
+        limit: 18,
         orderBy: {
           id: 'asc',
         },
@@ -33,7 +33,7 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
   const useSearchPokemons = () => {
     return useLazyQuery<IPokemonsQueryData>(GET_POKEMONS, {
       variables: {
-        limit: 20,
+        limit: 18,
       },
       onCompleted: (data) => {
         setPokemons(data.pokemons.map(pokemonsDTO))
