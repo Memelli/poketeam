@@ -3,10 +3,10 @@ import './index.css'
 
 import { client } from './graphql/client.ts'
 import { ApolloProvider } from '@apollo/client'
-import Router from './utils/routers.tsx'
+import App from './App.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ApolloProvider client={client}>
-    <Router />
+    <App />
   </ApolloProvider>,
 )

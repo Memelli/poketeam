@@ -1,12 +1,12 @@
 import './App.css'
-import { PokemonProvider } from '@/context/pokemon-context'
-import HomePage from './pages/HomePage'
+import Router from './utils/routers'
 
 function App() {
   return (
-    <PokemonProvider>
-      <HomePage />
-    </PokemonProvider>
+    <>
+      <div className="mb-8 h-20 w-full border text-black">TEste</div>
+      <Router />
+    </>
   )
 }
 
