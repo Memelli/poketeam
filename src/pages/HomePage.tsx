@@ -1,3 +1,7 @@
+import PokemonPagination from '@/components/pokemons/PokemonPagination'
+import PokemonSearchBar, {
+  SearchPokemonEvent,
+} from '@/components/pokemons/PokemonSearchBar'
 import PokemonsList from '@/components/pokemons/PokemonsList'
 import { usePokemonContext } from '@/context/pokemon-context'
 import { useEffect, useRef, useState } from 'react'
@@ -5,10 +9,10 @@ import { useEffect, useRef, useState } from 'react'
 interface IPageConfig {
   page: number
   perPage: number
-  total?: number
+  total: number
 }
 
-type SortOrder = '' | 'desc' | 'asc'
+export type SortOrder = '' | 'desc' | 'asc'
 
 interface ISearchEvent {
   text: string
@@ -17,15 +21,17 @@ interface ISearchEvent {
 }
 
 export default function HomePage(): React.ReactNode {
-  const { pokemons, useGetPokemons, useSearchPokemons } = usePokemonContext()
+  const { pokemons, totalCount, useGetPokemons, useSearchPokemons } =
+    usePokemonContext()
 
   const { loading } = useGetPokemons()
-  const [searchPokemons, { loading: isSearchLoading }] = useSearchPokemons()
+  const [searchPokemons] = useSearchPokemons()
 
   const isMounted = useRef(false)
   const [pageConfig, setPageConfig] = useState<IPageConfig>({
     page: 1,
     perPage: 20,
+    total: totalCount,
   })
   const [queryFilters, setQueryFilters] = useState<ISearchEvent>({
     text: '',
@@ -65,12 +71,25 @@ export default function HomePage(): React.ReactNode {
     queryFilters.sortOrder,
   ])
 
+  const handlerSearchPokemon = (event: Partial<SearchPokemonEvent>) => {
+    setPageConfig({ ...pageConfig, page: 1 })
+    setQueryFilters({ ...queryFilters, ...event })
+  }
+
   if (loading) {
     return <div>Loading..</div>
   }
 
   return (
     <div>
+      <PokemonSearchBar {...queryFilters} onSearch={handlerSearchPokemon} />
+      <div className="flex h-14 justify-center">
+        <PokemonPagination
+          {...pageConfig}
+          total={totalCount}
+          onPageChange={(page) => setPageConfig({ ...pageConfig, page })}
+        />
+      </div>
       <PokemonsList pokemons={pokemons} />
     </div>
   )
