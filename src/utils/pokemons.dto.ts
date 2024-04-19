@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import type { IPokemon } from '@/interfaces/pokemon'
 import type { IPokemonsQueryData } from '@/interfaces/pokemons-query-data'
 
