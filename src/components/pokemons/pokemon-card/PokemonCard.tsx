@@ -6,7 +6,7 @@ import PokemonCardFront from './PokemonCardFront'
 import PokemonCardBack from './PokemonCardBack'
 
 interface IPokemonCardProps extends IPokemon {
-  onSaveToTheTeam: (pokemonId: number) => void
+  handleClick: (pokemonId: number) => void
 }
 
 export default function PokemonCard({
@@ -14,7 +14,7 @@ export default function PokemonCard({
   name,
   types,
   stats,
-  onSaveToTheTeam,
+  handleClick,
 }: IPokemonCardProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false)
 
@@ -41,7 +41,7 @@ export default function PokemonCard({
     >
       {!showDetails ? (
         <PokemonCardFront
-          onSaveToTeam={onSaveToTheTeam}
+          handleClick={handleClick}
           id={id}
           name={name}
           types={types}

@@ -6,17 +6,17 @@ interface IPokemonCardFrontProps {
   name: string
   types: IPokemon['types']
   id: number
-  onSaveToTeam: (id: number) => void
+  handleClick: (id: number) => void
 }
 
 export default function PokemonCardFront({
   name,
   types,
   id,
-  onSaveToTeam,
+  handleClick,
 }: IPokemonCardFrontProps) {
-  const handleAddPokemonToTeam = () => {
-    onSaveToTeam(id)
+  const handlePokemonCardAction = () => {
+    handleClick(id)
   }
   return (
     <>
@@ -41,7 +41,7 @@ export default function PokemonCardFront({
       </div>
       {/* TODO: Adicionar o pokemon ao time */}
       <div onClick={(e) => e.stopPropagation()}>
-        <button className="text-black" onClick={handleAddPokemonToTeam}>
+        <button className="text-black" onClick={handlePokemonCardAction}>
           adicionar
         </button>
       </div>

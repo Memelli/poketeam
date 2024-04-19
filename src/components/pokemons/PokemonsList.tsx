@@ -12,7 +12,7 @@ export default function PokemonsList({ pokemons }: { pokemons: IPokemon[] }) {
                 <PokemonCard
                   key={pokemon.id}
                   {...pokemon}
-                  onSaveToTheTeam={() => console.log('hey')}
+                  handleClick={() => console.log('hey')}
                 />
               ))}
             </div>
