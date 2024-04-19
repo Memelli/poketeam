@@ -7,11 +7,11 @@ interface IPokemonCardBackProps {
 
 const PokemonStatMap: Record<string, string> = {
   hp: 'HP',
-  attack: 'Attack',
-  defense: 'Defense',
-  'special-attack': 'Special Attack',
-  'special-defense': 'Special Defense',
-  speed: 'Speed',
+  attack: 'Ataque',
+  defense: 'Defesa',
+  'special-attack': 'Ataque Especial',
+  'special-defense': 'Defesa Especial',
+  speed: 'Velocidade',
 }
 
 export default function PokemonCardBack({
@@ -20,17 +20,17 @@ export default function PokemonCardBack({
 }: IPokemonCardBackProps) {
   return (
     <>
-      <div className="flex items-center mb-4">
-        <p className="text-xl text-gray-700 font-bold mr-2">{name}</p>
+      <div className="mb-4 flex items-center">
+        <p className="mr-2 text-xl font-bold text-gray-700">{name}</p>
         <img
-          className="object-center object-cover rounded-full h-8 w-8"
+          className="h-8 w-8 rounded-full object-cover object-center"
           src={`https://img.pokemondb.net/sprites/home/normal/${name}.png`}
           alt={name}
         />
       </div>
       {Object.keys(stats).map((stat) => (
         <div key={stat}>
-          <span className="inline-block rounded-full text-gray-600 bg-gray-100 px-3 py-1 text-xs font-bold mb-1">
+          <span className="mb-1 inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-bold text-gray-600">
             {PokemonStatMap[stat]} <b>{stats[stat]}</b>
           </span>
         </div>

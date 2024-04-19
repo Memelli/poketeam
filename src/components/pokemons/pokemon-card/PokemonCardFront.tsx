@@ -1,11 +1,13 @@
 import { IPokemon } from '@/interfaces/pokemon'
-import { PokemonEnumTypes } from '@/interfaces/pokemon-enum-types'
+import { PokemonTypesEnum } from '@/interfaces/pokemon-enum-types'
+import capitalize from '@/utils/capitalize'
 import { PokemonColorByType } from '@/utils/pokemon-color-by-type'
 
 interface IPokemonCardFrontProps {
   name: string
   types: IPokemon['types']
   id: number
+  buttonText: string
   handleClick: (id: number) => void
 }
 
@@ -13,6 +15,7 @@ export default function PokemonCardFront({
   name,
   types,
   id,
+  buttonText,
   handleClick,
 }: IPokemonCardFrontProps) {
   const handlePokemonCardAction = () => {
@@ -28,12 +31,14 @@ export default function PokemonCardFront({
           height={128}
         />
       </div>
-      <div className="text-center mb-4">
-        <p className="text-xl text-gray-600 font-bold mb-2">{name}</p>
+      <div className="mb-4 text-center">
+        <p className="mb-2 text-xl font-bold text-gray-600">
+          {capitalize(name)}
+        </p>
         {types.map((type: string) => (
           <span
             key={type}
-            className={`inline-block rounded-full text-white px-2 py-1 text-xss font-bold mr-3 ${PokemonColorByType[type as PokemonEnumTypes]}`}
+            className={`text-xss mr-3 inline-block rounded-full px-2 py-1 font-bold text-white ${PokemonColorByType[type as PokemonTypesEnum]}`}
           >
             {type.toUpperCase()}
           </span>
@@ -42,7 +47,7 @@ export default function PokemonCardFront({
       {/* TODO: Adicionar o pokemon ao time */}
       <div onClick={(e) => e.stopPropagation()}>
         <button className="text-black" onClick={handlePokemonCardAction}>
-          adicionar
+          {buttonText}
         </button>
       </div>
     </>
