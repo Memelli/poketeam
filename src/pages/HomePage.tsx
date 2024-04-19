@@ -8,6 +8,8 @@ interface IPageConfig {
   total?: number
 }
 
+type SortOrder = '' | 'desc' | 'asc'
+
 interface ISearchEvent {
   text: string
   selectedType: string
