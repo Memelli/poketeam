@@ -2,6 +2,8 @@ export interface ITeamsQueryData {
   teams: {
     id: number
     name: string
+    theme: string
+    description: string
     created_at: Date
     updated_at: Date
     pokemons: {
