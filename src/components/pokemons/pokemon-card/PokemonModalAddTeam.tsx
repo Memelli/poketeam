@@ -6,8 +6,33 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { usePokemonContext } from '@/context/pokemon-context'
+import { Link } from 'react-router-dom'
+
+function AddPokemonToTeam() {
+  return (
+      <>
+        <DialogHeader>
+            <DialogTitle>Em qual time deseja adicionar o Pokemon?</DialogTitle>
+            <DialogDescription>
+              Você consegue ver ele no seu time na página de detalhes do time!
+            </DialogDescription>
+        </DialogHeader>
+      </>
+  )
+}
+
+function TeamsNotFounded() {
+  return (
+    <DialogHeader>
+      <DialogTitle>Nenhum time foi encontrado! <Link to='/my-teams'>Crie um agora!</Link></DialogTitle>
+    </DialogHeader>
+  )
+}
 
 export default function PokemonModalAddTeam() {
+  const { teams, useGetTeams } = usePokemonContext()
+  useGetTeams()
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -16,13 +41,9 @@ export default function PokemonModalAddTeam() {
         </button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Em qual time deseja adicionar o Pokemon?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
+        {
+          teams.length > 0 ? <AddPokemonToTeam /> : <TeamsNotFounded />
+        }
       </DialogContent>
     </Dialog>
   )
