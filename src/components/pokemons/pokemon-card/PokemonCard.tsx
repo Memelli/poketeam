@@ -8,12 +8,24 @@ import PokemonModalAddTeam from './PokemonModalAddTeam'
 
 import { Card } from '@/components/ui/card'
 
-export default function PokemonCard({ id, name, types, stats }: IPokemon) {
+interface IPokemonCard extends IPokemon {
+  isAdd: boolean
+}
+
+export default function PokemonCard({
+  id,
+  name,
+  types,
+  stats,
+  isAdd,
+}: IPokemonCard) {
   const [showDetails, setShowDetails] = useState<boolean>(false)
 
   const handleShowDetails = () => {
     setShowDetails((state) => !state)
   }
+
+  const isAddOrRemove = isAdd ? <PokemonModalAddTeam id={id} /> : <></>
 
   return (
     <motion.div
@@ -35,7 +47,7 @@ export default function PokemonCard({ id, name, types, stats }: IPokemon) {
       <Card className="flex h-72 w-full flex-col items-center justify-center">
         {!showDetails ? (
           <PokemonCardFront
-            button={<PokemonModalAddTeam />}
+            button={isAddOrRemove}
             id={id}
             name={name}
             types={types}

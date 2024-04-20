@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -6,10 +7,39 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
+import { RadioGroupItem, RadioGroup } from '@/components/ui/radio-group'
+import { toast } from '@/components/ui/use-toast'
 import { usePokemonContext } from '@/context/pokemon-context'
+import { ITeams } from '@/interfaces/teams'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function AddPokemonToTeam() {
+function AddPokemonToTeam({
+  teams,
+  pokemonId,
+}: {
+  teams: ITeams[]
+  pokemonId: number
+}) {
+  const { usePostPokemonToTeam } = usePokemonContext()
+  const [addPokemon] = usePostPokemonToTeam()
+  const [id, setId] = useState(0)
+  const handleSubmit = () => {
+    if (id === 0) {
+      return toast({
+        variant: 'destructive',
+        description: 'Você precisa selecionar um time',
+      })
+    }
+
+    addPokemon({
+      variables: {
+        teamId: Number(id),
+        pokemonId,
+      },
+    })
+  }
   return (
     <>
       <DialogHeader>
@@ -18,6 +48,22 @@ function AddPokemonToTeam() {
           Você consegue ver ele no seu time na página de detalhes do time!
         </DialogDescription>
       </DialogHeader>
+      <RadioGroup
+        onValueChange={(value) => setId(Number(value))}
+        className="flex flex-col"
+      >
+        {teams.map((team) => (
+          <div key={team.id} className="flex items-center gap-x-2">
+            <RadioGroupItem value={String(team.id)} id={String(team.id)}>
+              {team.name}
+            </RadioGroupItem>
+            <Label htmlFor={String(team.id)}>{team.name}</Label>
+          </div>
+        ))}
+      </RadioGroup>
+      <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleSubmit}>
+        Pronto!
+      </Button>
     </>
   )
 }
@@ -32,7 +78,7 @@ function TeamsNotFounded() {
   )
 }
 
-export default function PokemonModalAddTeam() {
+export default function PokemonModalAddTeam({ id }: { id: number }) {
   const { teams, useGetTeams } = usePokemonContext()
   useGetTeams()
   return (
@@ -43,7 +89,11 @@ export default function PokemonModalAddTeam() {
         </button>
       </DialogTrigger>
       <DialogContent>
-        {teams.length > 0 ? <AddPokemonToTeam /> : <TeamsNotFounded />}
+        {teams.length > 0 ? (
+          <AddPokemonToTeam teams={teams} pokemonId={id} />
+        ) : (
+          <TeamsNotFounded />
+        )}
       </DialogContent>
     </Dialog>
   )
