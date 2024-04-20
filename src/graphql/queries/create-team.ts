@@ -9,6 +9,8 @@ export const CREATE_TEAM = gql`
         created_at
         id
         name
+        theme
+        description
         updated_at
         pokemons: teams_pokemons_aggregate {
           nodes {
