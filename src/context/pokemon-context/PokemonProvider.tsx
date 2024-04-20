@@ -17,6 +17,7 @@ import { ITeams } from '@/interfaces/teams'
 import { teamsDTO } from '@/utils/teams.dto'
 import { GET_TEAMS } from '@/graphql/queries/get-teams'
 import { CREATE_TEAM } from '@/graphql/queries/create-team'
+import { useToast } from '@/components/ui/use-toast'
 
 interface ChildrenComponent {
   children: React.ReactNode
@@ -27,12 +28,13 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
   const [teamDetail, setTeamDetail] = useState<Partial<ITeams>>({})
   const [teams, setTeams] = useState<ITeams[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
+  const { toast } = useToast()
 
   const useGetPokemons = () => {
     return useQuery<IPokemonsQueryData>(GET_POKEMONS, {
       variables: {
         offset: 0,
-        limit: 18,
+        limit: 12,
         orderBy: {
           id: 'asc',
         },
@@ -119,7 +121,9 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
         clientName: 'HasuraEndpoint',
       },
       onCompleted: (data) => {
-        console.log(data)
+        toast({
+          description: 'Seu time foi criado!',
+        })
         const newTeam = data.insert_teams_teams_info.teams.map(teamsDTO)
         setTeams((state) => [...state, newTeam[0]])
       },
