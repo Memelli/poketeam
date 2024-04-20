@@ -6,8 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { RadioGroup } from '@radix-ui/react-radio-group'
-import { RadioGroupItem } from '@/components/ui/radio-group'
+import { RadioGroupItem, RadioGroup } from '@/components/ui/radio-group'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { usePokemonContext } from '@/context/pokemon-context'
@@ -29,7 +28,6 @@ export default function TeamCreateForm() {
   })
 
   const onSubmit = (data: z.infer<typeof CreateTeamSchema>) => {
-    console.log(data)
     createTeam({
       variables: {
         teamName: data.name,
