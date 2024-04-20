@@ -4,7 +4,7 @@ import PokemonSearchBar, {
 } from '@/components/pokemons/PokemonSearchBar'
 import PokemonsList from '@/components/pokemons/PokemonsList'
 import { usePokemonContext } from '@/context/pokemon-context'
-import { useEffect, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 
 interface IPageConfig {
   page: number
@@ -30,7 +30,7 @@ export default function HomePage(): React.ReactNode {
   const isMounted = useRef(false)
   const [pageConfig, setPageConfig] = useState<IPageConfig>({
     page: 1,
-    perPage: 20,
+    perPage: 12,
     total: totalCount,
   })
   const [queryFilters, setQueryFilters] = useState<ISearchEvent>({
@@ -39,8 +39,7 @@ export default function HomePage(): React.ReactNode {
     sortOrder: '',
   })
 
-  useEffect(() => {
-    // Esse user effect só pode rodar quando não for o primeiro render
+  useMemo(() => {
     if (!isMounted.current) {
       isMounted.current = true
       return
@@ -74,10 +73,6 @@ export default function HomePage(): React.ReactNode {
   const handlerSearchPokemon = (event: Partial<SearchPokemonEvent>) => {
     setPageConfig({ ...pageConfig, page: 1 })
     setQueryFilters({ ...queryFilters, ...event })
-  }
-
-  if (loading) {
-    return <div>Loading..</div>
   }
 
   return (

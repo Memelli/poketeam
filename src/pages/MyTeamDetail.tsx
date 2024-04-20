@@ -15,7 +15,6 @@ export default function MyTeamDetail() {
   }, [team])
 
   if (myTeam) {
-    console.log(team)
     return (
       <div>
         {team.name}
