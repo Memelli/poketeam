@@ -24,3 +24,15 @@ export interface IPokemonsQueryData {
     }
   }
 }
+
+export interface IPokemonsToTeam {
+  pokemons: {
+    returning: {
+      added_at: Date
+      id: number
+      is_deleted: boolean
+      pokemon_id: number
+      teams_id: number
+    }
+  }
+}
