@@ -20,7 +20,7 @@ import { createContext } from 'react'
 
 export interface IPokemonContext {
   pokemons: IPokemon[]
-  teamDetail: Partial<ITeams>
+  teamDetail: ITeams | undefined
   teams: ITeams[]
   totalCount: number
   useGetPokemons: () => QueryResult<IPokemonsQueryData, OperationVariables>
@@ -28,9 +28,10 @@ export interface IPokemonContext {
     IPokemonsQueryData,
     OperationVariables
   >
-  useGetTeamsPokemons: (
-    ids: number[],
-  ) => QueryResult<IPokemonsQueryData, OperationVariables>
+  useGetTeamsPokemons: () => LazyQueryResultTuple<
+    IPokemonsQueryData,
+    OperationVariables
+  >
   useSearchPokemons: () => LazyQueryResultTuple<
     IPokemonsQueryData,
     OperationVariables

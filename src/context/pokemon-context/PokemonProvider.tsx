@@ -26,7 +26,7 @@ interface ChildrenComponent {
 
 const PokemonProvider = ({ children }: ChildrenComponent) => {
   const [pokemons, setPokemons] = useState<IPokemon[]>([])
-  const [teamDetail, setTeamDetail] = useState<Partial<ITeams>>({})
+  const [teamDetail, setTeamDetail] = useState<ITeams>()
   const [teams, setTeams] = useState<ITeams[]>([])
   const [totalCount, setTotalCount] = useState<number>(0)
   const { toast } = useToast()
@@ -94,18 +94,8 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
     })
   }
 
-  const useGetTeamsPokemons = (ids: number[]) => {
-    return useQuery<IPokemonsQueryData>(GET_POKEMONS, {
-      variables: {
-        orderBy: {
-          id: 'asc',
-        },
-        where: {
-          id: {
-            _in: ids,
-          },
-        },
-      },
+  const useGetTeamsPokemons = () => {
+    return useLazyQuery<IPokemonsQueryData>(GET_POKEMONS, {
       context: {
         clientName: 'PokeEndpoint',
       },
@@ -134,7 +124,6 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
   const useGetTeamDetails = () => {
     return useLazyQuery<ITeamsQueryData>(GET_TEAM_DETAILS, {
       onCompleted: (data) => {
-        console.log(data)
         setTeamDetail(data.teams.map(teamsDTO)[0])
       },
     })
@@ -145,8 +134,10 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
       context: {
         clientName: 'HasuraEndpoint',
       },
-      onCompleted: (data) => {
-        console.log(data)
+      onCompleted: () => {
+        toast({
+          description: 'Pokemon adicionado com sucesso ao time!',
+        })
       },
     })
   }
