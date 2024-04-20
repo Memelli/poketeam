@@ -8,16 +8,7 @@ import PokemonModalAddTeam from './PokemonModalAddTeam'
 
 import { Card } from '@/components/ui/card'
 
-interface IPokemonCardProps extends IPokemon {
-  handleClick: (pokemonId: number) => void
-}
-
-export default function PokemonCard({
-  id,
-  name,
-  types,
-  stats,
-}: IPokemonCardProps) {
+export default function PokemonCard({ id, name, types, stats }: IPokemon) {
   const [showDetails, setShowDetails] = useState<boolean>(false)
 
   const handleShowDetails = () => {

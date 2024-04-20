@@ -12,7 +12,6 @@ export default function PokemonsList({ pokemons }: { pokemons: IPokemon[] }) {
                 <PokemonCard
                   key={pokemon.id}
                   {...pokemon}
-                  handleClick={() => console.log('hey')}
                 />
               ))}
             </div>
