@@ -24,7 +24,7 @@ export default function HomePage(): React.ReactNode {
   const { pokemons, totalCount, useGetPokemons, useSearchPokemons } =
     usePokemonContext()
 
-  const { loading } = useGetPokemons()
+  useGetPokemons()
   const [searchPokemons] = useSearchPokemons()
 
   const isMounted = useRef(false)
