@@ -1,30 +1,14 @@
-# React + TypeScript + Vite
+# TechStack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Para este projeto foi utilizado React + Vite + TypeScript. Não foi utilizado nenhuma biblioteca para state management, apenas a Context API. Para as conexões com o Hasura (API) foi utilizado o ApolloClient.
 
-Currently, two official plugins are available:
+Por gostar muito do Tailwind, acabei escolhendo ele junto com a biblioteca Shadcn/ui.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Versão do node recomendada: 20.12.2 (LTS/Iron)
 
-## Expanding the ESLint configuration
+# Como rodar o projeto
+Para inicializar o projeto basta usar o comando docker-compose up -d.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Feito isso, o Hasura vai inicializar no endereço http://localhost:8080/console/.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Importe o metadata do hasura, que está contido na pasta ./src/hasura-api, e depois, importe o schema do PostgreSQL, que está no root do projeto com o nome de schema.json.
