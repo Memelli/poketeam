@@ -1,3 +1,4 @@
+import { CardHeader } from '@/components/ui/card'
 import { IPokemon } from '@/interfaces/pokemon'
 import { PokemonTypesEnum } from '@/interfaces/pokemon-enum-types'
 import capitalize from '@/utils/capitalize'
@@ -7,22 +8,16 @@ interface IPokemonCardFrontProps {
   name: string
   types: IPokemon['types']
   id: number
-  buttonText: string
-  handleClick: (id: number) => void
+  button: React.ReactNode
 }
 
 export default function PokemonCardFront({
   name,
   types,
-  id,
-  buttonText,
-  handleClick,
+  button,
 }: IPokemonCardFrontProps) {
-  const handlePokemonCardAction = () => {
-    handleClick(id)
-  }
   return (
-    <>
+    <CardHeader className="flex items-center justify-center">
       <div className="mb-2">
         <img
           src={`https://img.pokemondb.net/sprites/home/normal/${name}.png`}
@@ -38,18 +33,14 @@ export default function PokemonCardFront({
         {types.map((type: string) => (
           <span
             key={type}
-            className={`text-xss mr-3 inline-block rounded-full px-2 py-1 font-bold text-white ${PokemonColorByType[type as PokemonTypesEnum]}`}
+            className={`mr-3 inline-block rounded-full px-2 py-1 text-xs font-bold text-white ${PokemonColorByType[type as PokemonTypesEnum]}`}
           >
             {type.toUpperCase()}
           </span>
         ))}
       </div>
       {/* TODO: Adicionar o pokemon ao time */}
-      <div onClick={(e) => e.stopPropagation()}>
-        <button className="text-black" onClick={handlePokemonCardAction}>
-          {buttonText}
-        </button>
-      </div>
-    </>
+      <div onClick={(e) => e.stopPropagation()}>{button}</div>
+    </CardHeader>
   )
 }

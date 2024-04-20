@@ -4,6 +4,9 @@ import { motion } from 'framer-motion'
 import { IPokemon } from '@/interfaces/pokemon'
 import PokemonCardFront from './PokemonCardFront'
 import PokemonCardBack from './PokemonCardBack'
+import PokemonModalAddTeam from './PokemonModalAddTeam'
+
+import { Card } from '@/components/ui/card'
 
 interface IPokemonCardProps extends IPokemon {
   handleClick: (pokemonId: number) => void
@@ -14,7 +17,6 @@ export default function PokemonCard({
   name,
   types,
   stats,
-  handleClick,
 }: IPokemonCardProps) {
   const [showDetails, setShowDetails] = useState<boolean>(false)
 
@@ -24,7 +26,7 @@ export default function PokemonCard({
 
   return (
     <motion.div
-      className="w-full bg-white flex flex-col justify-center items-center shadow cursor-pointer h-72"
+      className="cursor-pointer"
       initial={{ opacity: 0.5, scale: 0.5 }}
       animate={{
         opacity: 1,
@@ -39,16 +41,18 @@ export default function PokemonCard({
       whileHover={{ y: -5 }}
       onClick={handleShowDetails}
     >
-      {!showDetails ? (
-        <PokemonCardFront
-          handleClick={handleClick}
-          id={id}
-          name={name}
-          types={types}
-        />
-      ) : (
-        <PokemonCardBack name={name} stats={stats} />
-      )}
+      <Card className="flex h-72 w-full flex-col items-center justify-center">
+        {!showDetails ? (
+          <PokemonCardFront
+            button={<PokemonModalAddTeam />}
+            id={id}
+            name={name}
+            types={types}
+          />
+        ) : (
+          <PokemonCardBack name={name} stats={stats} />
+        )}
+      </Card>
     </motion.div>
   )
 }

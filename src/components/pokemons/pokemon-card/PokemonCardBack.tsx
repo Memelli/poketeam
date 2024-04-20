@@ -1,3 +1,4 @@
+import { CardHeader } from '@/components/ui/card'
 import { IPokemon } from '@/interfaces/pokemon'
 
 interface IPokemonCardBackProps {
@@ -19,7 +20,7 @@ export default function PokemonCardBack({
   stats,
 }: IPokemonCardBackProps) {
   return (
-    <>
+    <CardHeader>
       <div className="mb-4 flex items-center">
         <p className="mr-2 text-xl font-bold text-gray-700">{name}</p>
         <img
@@ -35,6 +36,6 @@ export default function PokemonCardBack({
           </span>
         </div>
       ))}
-    </>
+    </CardHeader>
   )
 }
