@@ -85,7 +85,7 @@ export default function HomePage(): React.ReactNode {
           onPageChange={(page) => setPageConfig({ ...pageConfig, page })}
         />
       </div>
-      <PokemonsList pokemons={pokemons} />
+      <PokemonsList isAdd={true} pokemons={pokemons} />
     </div>
   )
 }
