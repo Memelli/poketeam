@@ -1,3 +1,11 @@
 table:
   name: teams_info
   schema: teams
+array_relationships:
+  - name: teams_pokemons
+    using:
+      foreign_key_constraint_on:
+        column: teams_id
+        table:
+          name: teams_pokemons
+          schema: teams
