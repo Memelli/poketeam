@@ -93,13 +93,13 @@ export default function TeamCreateForm() {
                     <FormControl>
                       <RadioGroupItem value="yellow" />
                     </FormControl>
-                    <FormLabel className="font-normal">Amarelo</FormLabel>
+                    <FormLabel className="font-normal">Instinct</FormLabel>
                   </FormItem>
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem value="blue" />
                     </FormControl>
-                    <FormLabel className="font-normal">Blue</FormLabel>
+                    <FormLabel className="font-normal">Mystic</FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>
