@@ -11,21 +11,23 @@ import { Link } from 'react-router-dom'
 
 function AddPokemonToTeam() {
   return (
-      <>
-        <DialogHeader>
-            <DialogTitle>Em qual time deseja adicionar o Pokemon?</DialogTitle>
-            <DialogDescription>
-              Você consegue ver ele no seu time na página de detalhes do time!
-            </DialogDescription>
-        </DialogHeader>
-      </>
+    <>
+      <DialogHeader>
+        <DialogTitle>Em qual time deseja adicionar o Pokemon?</DialogTitle>
+        <DialogDescription>
+          Você consegue ver ele no seu time na página de detalhes do time!
+        </DialogDescription>
+      </DialogHeader>
+    </>
   )
 }
 
 function TeamsNotFounded() {
   return (
     <DialogHeader>
-      <DialogTitle>Nenhum time foi encontrado! <Link to='/my-teams'>Crie um agora!</Link></DialogTitle>
+      <DialogTitle>
+        Nenhum time foi encontrado! <Link to="/my-teams">Crie um agora!</Link>
+      </DialogTitle>
     </DialogHeader>
   )
 }
@@ -41,9 +43,7 @@ export default function PokemonModalAddTeam() {
         </button>
       </DialogTrigger>
       <DialogContent>
-        {
-          teams.length > 0 ? <AddPokemonToTeam /> : <TeamsNotFounded />
-        }
+        {teams.length > 0 ? <AddPokemonToTeam /> : <TeamsNotFounded />}
       </DialogContent>
     </Dialog>
   )
