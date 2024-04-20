@@ -18,6 +18,7 @@ import { teamsDTO } from '@/utils/teams.dto'
 import { GET_TEAMS } from '@/graphql/queries/get-teams'
 import { CREATE_TEAM } from '@/graphql/queries/create-team'
 import { useToast } from '@/components/ui/use-toast'
+import { GET_TEAM_DETAILS } from '@/graphql/queries/get-team-details'
 
 interface ChildrenComponent {
   children: React.ReactNode
@@ -130,21 +131,13 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
     })
   }
 
-  const useGetTeamDetails = (id: number) => {
-    const teamFounded = teams.find((team) => team.id === id)
-    const [searchPokemons] = useGetPokemonById()
-    if (teamFounded) {
-      setTeamDetail(teamFounded)
-      searchPokemons({
-        variables: {
-          where: {
-            id: {
-              _in: teamFounded.pokemons,
-            },
-          },
-        },
-      })
-    }
+  const useGetTeamDetails = () => {
+    return useLazyQuery<ITeamsQueryData>(GET_TEAM_DETAILS, {
+      onCompleted: (data) => {
+        console.log(data)
+        setTeamDetail(data.teams.map(teamsDTO)[0])
+      },
+    })
   }
 
   const usePostPokemonToTeam = () => {

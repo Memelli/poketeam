@@ -48,9 +48,11 @@ export interface IPokemonContext {
     ApolloCache<unknown>
   >
   useGetTeams: () => QueryResult<ITeamsQueryData, OperationVariables>
-  useGetTeamDetails: (id: number) => void
+  useGetTeamDetails: () => LazyQueryResultTuple<
+    ITeamsQueryData,
+    OperationVariables
+  >
 }
-
 const PokemonContext = createContext<IPokemonContext | undefined>(undefined)
 
 export default PokemonContext
