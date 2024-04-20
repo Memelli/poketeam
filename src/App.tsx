@@ -1,4 +1,5 @@
 import './App.css'
+import { Toaster } from './components/ui/toaster'
 import Router from './utils/routers'
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <div className="mb-8 h-20 w-full border text-black">TEste</div>
       <Router />
+      <Toaster />
     </>
   )
 }
