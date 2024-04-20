@@ -21,6 +21,7 @@
     "noFallthroughCasesInSwitch": true, 
 
     /* Path */
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
