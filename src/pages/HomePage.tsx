@@ -1,3 +1,4 @@
+import Loading from '@/components/global/Loading'
 import PokemonPagination from '@/components/pokemons/PokemonPagination'
 import PokemonSearchBar, {
   SearchPokemonEvent,
@@ -24,8 +25,8 @@ export default function HomePage(): React.ReactNode {
   const { pokemons, totalCount, useGetPokemons, useSearchPokemons } =
     usePokemonContext()
 
-  useGetPokemons()
-  const [searchPokemons] = useSearchPokemons()
+  const { loading } = useGetPokemons()
+  const [searchPokemons, { loading: searchLoading }] = useSearchPokemons()
 
   const isMounted = useRef(false)
   const [pageConfig, setPageConfig] = useState<IPageConfig>({
@@ -85,7 +86,15 @@ export default function HomePage(): React.ReactNode {
           onPageChange={(page) => setPageConfig({ ...pageConfig, page })}
         />
       </div>
-      <PokemonsList isAdd={true} pokemons={pokemons} />
+      <div className="min-h-40">
+        {loading || searchLoading ? (
+          <div className="m-auto">
+            <Loading />
+          </div>
+        ) : (
+          <PokemonsList isAdd={true} pokemons={pokemons} />
+        )}
+      </div>
     </div>
   )
 }

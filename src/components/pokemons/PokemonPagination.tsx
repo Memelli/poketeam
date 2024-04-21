@@ -48,7 +48,7 @@ export default function PokemonPagination({
       >
         Próxima página
       </motion.button>
-      <p className="ml-10 text-sm font-bold text-black">
+      <p className="ml-10 text-sm font-bold text-white">
         {page} de {totalPages()}
       </p>
     </div>
