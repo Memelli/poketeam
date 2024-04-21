@@ -88,7 +88,6 @@ const PokemonProvider = ({ children }: ChildrenComponent) => {
         clientName: 'HasuraEndpoint',
       },
       onCompleted: (data) => {
-        console.log(data.teams.map(teamsDTO))
         setTeams(data.teams.map(teamsDTO))
       },
     })
