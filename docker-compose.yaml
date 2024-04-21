@@ -12,12 +12,6 @@ services:
         source: ./
         target: /srv/app
     tty: true
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
   postgres:
     image: postgres:15
     restart: always
